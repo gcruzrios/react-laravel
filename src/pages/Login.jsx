@@ -60,7 +60,9 @@ const response = await axios.post(`/api/login`,{ email, password },  {headers: {
     const token = response.data.access_token;
     localStorage.setItem("Token", token);
     window.location.href = "/index";
-  } else {
+  } 
+  
+  if (mensaje==="User not found") {
     Swal.fire({
       text: "Usuario o contraseña incorrectas..",
       icon: "error",
