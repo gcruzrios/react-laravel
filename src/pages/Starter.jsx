@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import axios from "axios";
 import "./starter-template.css";
 
 const Starter = () => {
@@ -10,10 +13,30 @@ const Starter = () => {
 
   const d = new Date();
   let year = d.getFullYear();
+  
+  
+  const [products, setProducts] = useState([]);
+
+
+  const peticionGet = async () => {
+    console.log("en petición get")         
+    await axios.get("/api/products").then((response) => {
+      setProducts(response.data);
+      console.log(products);
+    });
+
+
+  };
+
+  useEffect(() => {
+   
+    peticionGet();
+  }, []);
+
 
   return (
     <div>
-      <div className="col-lg-8 mx-auto p-3 py-md-5">
+      <div className="col-lg-12 mx-auto p-3 py-md-5">
         <header className="d-flex justify-content-between pb-3 mb-5 border-bottom">
           <a
             href="/index"
@@ -47,12 +70,32 @@ const Starter = () => {
 
         <main>
           <h1 className="text-left">Get started with Bootstrap</h1>
-          <p className="fs-5 col-md-8">
-            Quickly and easily get started with Bootstrap's compiled,
-            production-ready files with this barebones example featuring some
-            basic HTML and helpful links. Download all our examples to get
-            started.
-          </p>
+
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+
+          {/* {products.map((record) => ( 
+              <tr key={record.id}>
+                <th scope="row">1</th>
+                <td>{record.title}</td>
+                <td>{record.description}</td>
+                <td>
+                    <Link className="btn btn-primary">Editar</Link>
+                    <Button className="btn btn-danger">Borrar</Button>
+                </td>
+              </tr>
+               ))}     */}
+              
+            </tbody>
+          </table>
 
           <div className="mb-5 text-right">
             <a href="" className="btn btn-primary btn-lg px-4 ">

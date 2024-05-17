@@ -53,16 +53,24 @@ const response = await axios.post(`/api/login`,{ email, password },  {headers: {
 }}, );
 
   const mensaje = response.data.message;
+  const status =response.message;
 
+ 
+  console.log(status)
   console.log(mensaje);
+
+  
+
 
   if (mensaje === "Login success") {
     const token = response.data.access_token;
     localStorage.setItem("Token", token);
     window.location.href = "/index";
   } 
+
+
   
-  if (mensaje==="User not found") {
+  if (mensaje===" Request failed with status code 401") {
     Swal.fire({
       text: "Usuario o contraseña incorrectas..",
       icon: "error",
