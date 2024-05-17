@@ -13,6 +13,7 @@ const d = new Date();
 let year = d.getFullYear();
 
 
+
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
 
@@ -21,20 +22,37 @@ const handleLogin = async (e) => {
 
   let bodyFormData = new FormData();
   
-  //bodyFormData.setEmail(email);
-  //bodyFormData.setPassword(password);
+  
+//const ingreso = { email: document.getElementById('email').value, password: document.getElementById('password') };
+const ingreso = {email, password}
+  
+console.log(ingreso);
 
-  bodyFormData.set('email',email);
-  bodyFormData.set('password', password);
+// var body = {
+//   email: 'Flintstone@gmail.com',
+//   password: '123456'
+// }
 
-  const ingreso = { email:email, password:password };
-  console.log(ingreso);
-  const response = await axios.post(`/api/login`,{data:ingreso},  {headers: {
-    "Content-Type": "application/x-www-form-urlencoded",
-    // "Content-Type": "multipart/form-data",
+// axios({
+//   method: 'post',
+//   url: '/api/login',
+//   data: body
+// })
+// .then(function (response) {
+//   console.log(response);
+// })
+// .catch(function (error) {
+//   console.log(error);
+// });
+
+//const response = await axios.post(`/api/login`,{data:ingreso},  {headers: {
+const response = await axios.post(`/api/login`,{ email, password },  {headers: {
+      
+  //"Content-Type": "application/x-www-form-urlencoded",
+   "Content-Type": "multipart/form-data",
 }}, );
 
-  const mensaje = response;
+  const mensaje = response.data.message;
 
   console.log(mensaje);
 
@@ -54,35 +72,38 @@ const handleLogin = async (e) => {
   return (
     <div>
 
-<main class="form-signin">
-  <form>
-    <img class="mb-4" src="/reshot-icon-logout-39XGS2UZLY.svg" alt="" width="72" height="57"/>
-    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+<main className="form-signin">
+  <form encType='multipart/form-data'  id="login-form">
+    <img className="mb-4" src="/reshot-icon-logout-39XGS2UZLY.svg" alt="" width="72" height="57"/>
+    <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
 
-    <div class="form-floating">
-      <input type="email" class="form-control" id="floatingInput" 
+    <div className="form-floating">
+      <input type="email" className="form-control" id="floatingInput" 
       onChange={(e) => setEmail(e.target.value)}
-      placeholder="name@example.com"/>
+      placeholder="name@example.com"
+      name="email"/>
+
       <label for="floatingInput">Email address</label>
     </div>
-    <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" 
+    <div className="form-floating">
+      <input type="password" className="form-control" id="floatingPassword" 
        onChange={(e) => setPassword(e.target.value)}
-      placeholder="Password"/>
+      placeholder="Password"
+      name="password"/>
       <label for="floatingPassword">Password</label>
     </div>
 
-    <div class="checkbox mb-3">
+    <div className="checkbox mb-3">
       <label>
         <input type="checkbox" value="remember-me"/> Remember me
       </label>
     </div>
-    <button class="w-100 btn btn-lg btn-primary" 
+    <button className="w-100 btn btn-lg btn-primary" 
     
     onClick={handleLogin}
     >Sign in
     </button>
-    <p class="mt-5 mb-3 text-muted">&copy; 2017–{ year }</p>
+    <p className="mt-5 mb-3 text-muted">&copy; 2017–{ year }</p>
   </form>
 </main>
 
