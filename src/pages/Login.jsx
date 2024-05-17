@@ -57,7 +57,7 @@ const response = await axios.post(`/api/login`,{ email, password },  {headers: {
   console.log(mensaje);
 
   if (mensaje === "Login success") {
-    const token = response.token;
+    const token = response.data.access_token;
     localStorage.setItem("Token", token);
     window.location.href = "/index";
   } else {

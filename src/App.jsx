@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Starter from './pages/Starter';
 
 import NotFound from './pages/Error404';
+import Test from './pages/Test';
 
 
 
@@ -23,7 +24,9 @@ function App() {
             {" "}
           </Route>
           
-
+          <Route path="/test" element={< Test />} exact>
+            {" "}
+          </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
         
