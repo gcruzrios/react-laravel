@@ -3,6 +3,8 @@ import './App.css'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Login from './pages/Login';
+import Starter from './pages/Starter';
+
 import NotFound from './pages/Error404';
 
 
@@ -17,7 +19,7 @@ function App() {
           <Route path="/" element={<Login />} exact>
             {" "}
           </Route>
-          <Route path="/index" element={< Index />} exact>
+          <Route path="/index" element={< Starter />} exact>
             {" "}
           </Route>
           
