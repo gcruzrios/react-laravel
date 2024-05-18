@@ -7,6 +7,7 @@ import Starter from './pages/Starter';
 
 import NotFound from './pages/Error404';
 import Test from './pages/Test';
+import AddProduct from './pages/AddProduct';
 
 
 
@@ -23,7 +24,9 @@ function App() {
           <Route path="/index" element={< Starter />} exact>
             {" "}
           </Route>
-          
+          <Route path="/addproduct" element={< AddProduct />} exact>
+            {" "}
+          </Route>
           <Route path="/test" element={< Test />} exact>
             {" "}
           </Route>

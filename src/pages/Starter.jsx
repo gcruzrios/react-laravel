@@ -6,7 +6,7 @@ import "./starter-template.css";
 
 const Starter = () => {
   const [products, setProducts] = useState([]);
-
+  const Token = localStorage.getItem("Token");
   const logout = () => {
     console.log("Estoy en Logout");
     localStorage.clear();
@@ -16,7 +16,40 @@ const Starter = () => {
   const d = new Date();
   let year = d.getFullYear();
   
-  
+  const eliminar_completo = async (id) => {
+    const response = await axios.delete(`/api/products/${id}`,{headers: {
+      'Authorization': 'Bearer ' + Token
+    }});
+    
+    console.log(response)
+    peticionGet();
+
+
+
+  }  
+  const delete_record = async (id) => {
+
+
+    Swal.fire({
+      title: 'Are you sure?',
+      showDenyButton: false,
+      showCancelButton: true,
+      confirmButtonText: 'Delete',
+      denyButtonText: `Cancel`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+
+        eliminar_completo(id);
+        Swal.fire('Record Deleted!', '', 'success')
+      } else if (result.isDenied) {
+        Swal.fire('Nothing happened', '', 'info')
+      }
+    })
+    
+   
+  };
+
  
 
 
@@ -44,7 +77,7 @@ const Starter = () => {
         <header className="d-flex justify-content-between pb-3 mb-5 border-bottom">
           <a
             href="/index"
-            className="d-flex align-items-center text-dark text-decoration-none"
+            className="d-flex align-items-left text-dark text-decoration-none"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -74,7 +107,10 @@ const Starter = () => {
 
         <main>
           <h1 className="text-left">Get started with Bootstrap</h1>
-          
+            <Link to="/addproduct" className="btn btn-primary float-end">
+                  Add Product
+            </Link>
+            {/* <button className="btn btn-primary float-end">Add New</button> */}
             <table class="table table-striped">
             <thead>
               <tr>
@@ -88,12 +124,12 @@ const Starter = () => {
  
            {products.map((record) => ( 
               <tr key={record.id}>
-                <th scope="row">1</th>
+                <th scope="row">{record.id}</th>
                 <td>{record.title}</td>
                 <td>{record.description}</td>
                 <td>
                     <Link className="btn btn-primary">Edit</Link>
-                    <button className="btn btn-danger">Delete</button>
+                    <button className="btn btn-danger" onClick={()=>delete_record(record.id)}>Delete</button>
                 </td>
               </tr>
                ))}     
