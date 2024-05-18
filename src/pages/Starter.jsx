@@ -5,6 +5,8 @@ import axios from "axios";
 import "./starter-template.css";
 
 const Starter = () => {
+  const [products, setProducts] = useState([]);
+
   const logout = () => {
     console.log("Estoy en Logout");
     localStorage.clear();
@@ -15,13 +17,15 @@ const Starter = () => {
   let year = d.getFullYear();
   
   
-  const [products, setProducts] = useState([]);
+ 
 
 
   const peticionGet = async () => {
     console.log("en petición get")         
     await axios.get("/api/products").then((response) => {
-      setProducts(response.data);
+      //
+     // console.log(response.data.data);
+      setProducts(response.data.data);
       console.log(products);
     });
 
@@ -29,7 +33,7 @@ const Starter = () => {
   };
 
   useEffect(() => {
-   
+    
     peticionGet();
   }, []);
 
@@ -70,8 +74,8 @@ const Starter = () => {
 
         <main>
           <h1 className="text-left">Get started with Bootstrap</h1>
-
-          <table class="table table-striped">
+          
+            <table class="table table-striped">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -81,18 +85,18 @@ const Starter = () => {
               </tr>
             </thead>
             <tbody>
-
-          {/* {products.map((record) => ( 
+ 
+           {products.map((record) => ( 
               <tr key={record.id}>
                 <th scope="row">1</th>
                 <td>{record.title}</td>
                 <td>{record.description}</td>
                 <td>
-                    <Link className="btn btn-primary">Editar</Link>
-                    <Button className="btn btn-danger">Borrar</Button>
+                    <Link className="btn btn-primary">Edit</Link>
+                    <button className="btn btn-danger">Delete</button>
                 </td>
               </tr>
-               ))}     */}
+               ))}     
               
             </tbody>
           </table>
