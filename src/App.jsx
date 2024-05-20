@@ -8,6 +8,7 @@ import Starter from './pages/Starter';
 import NotFound from './pages/Error404';
 import Test from './pages/Test';
 import AddProduct from './pages/AddProduct';
+import EditProduct from './pages/EditProduct';
 
 
 
@@ -25,6 +26,9 @@ function App() {
             {" "}
           </Route>
           <Route path="/addproduct" element={< AddProduct />} exact>
+            {" "}
+          </Route>
+          <Route path="/editproduct/:id" element={< EditProduct />} exact>
             {" "}
           </Route>
           <Route path="/test" element={< Test />} exact>

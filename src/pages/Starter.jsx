@@ -128,7 +128,7 @@ const Starter = () => {
                 <td>{record.title}</td>
                 <td>{record.description}</td>
                 <td>
-                    <Link className="btn btn-primary">Edit</Link>
+                    <Link to={`/editproduct/${record.id}`} className="btn btn-primary">Edit</Link>
                     <button className="btn btn-danger" onClick={()=>delete_record(record.id)}>Delete</button>
                 </td>
               </tr>
