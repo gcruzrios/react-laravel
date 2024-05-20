@@ -28,24 +28,7 @@ const ingreso = {email, password}
   
 console.log(ingreso);
 
-// var body = {
-//   email: 'Flintstone@gmail.com',
-//   password: '123456'
-// }
 
-// axios({
-//   method: 'post',
-//   url: '/api/login',
-//   data: body
-// })
-// .then(function (response) {
-//   console.log(response);
-// })
-// .catch(function (error) {
-//   console.log(error);
-// });
-
-//const response = await axios.post(`/api/login`,{data:ingreso},  {headers: {
 const response = await axios.post(`/api/login`,{ email, password },  {headers: {
    "Content-Type": "multipart/form-data",
 }}, )
@@ -57,6 +40,11 @@ const response = await axios.post(`/api/login`,{ email, password },  {headers: {
  
   console.log(status)
   console.log(mensaje);
+  if (mensaje === "Login success") {
+    const token = response.data.access_token;
+    localStorage.setItem("Token", token);
+    window.location.href = "/index";
+  } 
 })
 .catch(function (error) {
   console.log(error);
@@ -67,17 +55,7 @@ const response = await axios.post(`/api/login`,{ email, password },  {headers: {
 });
   
 
-  if (err){
-    console.log ("Error")
-  }
-  
-
-
-  if (mensaje === "Login success") {
-    const token = response.data.access_token;
-    localStorage.setItem("Token", token);
-    window.location.href = "/index";
-  } 
+ 
 
 
   
