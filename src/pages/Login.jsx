@@ -47,18 +47,29 @@ console.log(ingreso);
 
 //const response = await axios.post(`/api/login`,{data:ingreso},  {headers: {
 const response = await axios.post(`/api/login`,{ email, password },  {headers: {
-      
-  //"Content-Type": "application/x-www-form-urlencoded",
    "Content-Type": "multipart/form-data",
-}}, );
-
+}}, )
+.then(function (response) {
+  console.log(response);
   const mensaje = response.data.message;
-  const status =response.message;
+  const status =response.request.status;
 
  
   console.log(status)
   console.log(mensaje);
+})
+.catch(function (error) {
+  console.log(error);
+  Swal.fire({
+    text: "Bad Credentials...",
+    icon: "error",
+  });
+});
+  
 
+  if (err){
+    console.log ("Error")
+  }
   
 
 
@@ -70,12 +81,6 @@ const response = await axios.post(`/api/login`,{ email, password },  {headers: {
 
 
   
-  if (mensaje===" Request failed with status code 401") {
-    Swal.fire({
-      text: "Usuario o contraseña incorrectas..",
-      icon: "error",
-    });
-  }
 };
 
 
